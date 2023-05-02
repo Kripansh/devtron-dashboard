@@ -2,9 +2,19 @@
 # See: https://circleci.com/docs/configuration-reference
 version: 2.1
 
+orbs:
+  docker: circleci/docker@1.7.0
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
+  example-job:
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
+    steps:
+      - docker/build:
+          image: devtron-dashboard
   say-hello:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
@@ -24,3 +34,4 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
+      - example-job
